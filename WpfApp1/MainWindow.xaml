@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="450" Width="1000">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Height="30" VerticalAlignment="Top" Grid.Row="0">
+            <Menu   >
+                <MenuItem  Margin="10,0,0,0" Header="菜单" Padding="5">
+                    <MenuItem Header="导入戒指"  ></MenuItem>
+                    <MenuItem Header="导入钻石"></MenuItem>
+           
+                    <MenuItem Header="退出"></MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="合并" Padding="5">
+                   
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+              
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Viewport3D x:Name="vp"           
+                    Margin="0,0,0,0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
+                <Viewport3D.Camera>
+                    <!--FieldOfView="45" FarPlaneDistance="100" LookDirection="0,0,-3.4142135623731" NearPlaneDistance="0.1" Position="0,0,3.4142135623731"-->
+                    <PerspectiveCamera    UpDirection="0,0,0"/>
+                </Viewport3D.Camera>
+            </Viewport3D>
+        </Grid>
     </Grid>
 </Window>
