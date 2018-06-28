@@ -48,5 +48,11 @@ namespace WpfApp1
             }
             return ModelPartList2;
         }
+
+        public static void WriteModelPart()
+        {
+
+        }
+         
     }
 }

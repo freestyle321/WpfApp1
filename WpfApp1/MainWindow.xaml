@@ -15,8 +15,9 @@
             <Menu   >
                 <MenuItem  Margin="10,0,0,0" Header="菜单" Padding="5">
                     <MenuItem Header="导入戒指" Click="MenuItem_ImportPart1"  ></MenuItem>
+                    <MenuItem Header="导入钻托" Click="MenuItem_ImportPart2"></MenuItem>
                     <MenuItem Header="导入钻石" Click="MenuItem_ImportPart2"></MenuItem>
-           
+
                     <MenuItem Header="退出"></MenuItem>
                 </MenuItem>
 

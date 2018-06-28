@@ -55,52 +55,28 @@ namespace WpfApp1
             InitializeComponent();
             ModelPartList1 = CacheData.GetModelPartList1();
             ModelPartList2 = CacheData.GetModelPartList2();
+            this.Closed += MainWindow_Closed;
         }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private void MenuItem_ImportPart1(object sender, RoutedEventArgs e)
         {
-
+            ImportModel imp = new ImportModel(ModelPartList1);
+            imp.ShowDialog();
+       
+                
         }
         private void MenuItem_ImportPart2(object sender, RoutedEventArgs e)
         {
+            ImportModel imp = new ImportModel(ModelPartList2);
+            imp.ShowDialog();
 
         }
 
-        public void ImportModel(List<ModelClass> list)
-        {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.DefaultExt = ".obj";
-            dlg.Multiselect = true;
-           
-            Nullable<bool> result = dlg.ShowDialog();
 
-            // Get the selected file name and display in a TextBox 
-            if (result == true)
-            {
-                // Open document 
-                List<string> filename = dlg.FileNames.ToList();
-                List<string> Safefilename = dlg.SafeFileNames.ToList();
-                filename.ForEach(r =>
-                {
-                if (r.IndexOf(".obj") == -1)
-                {
-                    MessageBox.Show("导入的文件格式错误！请重新选择!");
-
-                    return;
-                }
-                else
-                {
-                        Safefilename.ForEach(p => {
-                            if(r.Contains(p))
-                            {
-                                list.Add(new ModelClass() { File = r,Name=p });
-                            }
-                        });
-                       
-                    }
-                });
-                
-               
-            }
-        }
     }
 }

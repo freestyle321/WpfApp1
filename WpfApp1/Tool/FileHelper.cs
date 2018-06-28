@@ -21,7 +21,7 @@ namespace WpfApp1.Tool
             ProductedDirectory = fileDirectory + "\\Data\\Producted";
             CreateDictionarty(Part1Directory);
             CreateDictionarty(Part2Directory);
-            CreateDictionarty(Part2Directory);
+            CreateDictionarty(ProductedDirectory);
         }
 
         /// <summary>
