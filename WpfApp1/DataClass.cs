@@ -32,6 +32,18 @@ namespace WpfApp1
             }
             get { return this._File; }
         }
+
+        private string _Image;
+        public string Image
+        {
+            set
+            {
+                _Image = value;
+                if (this.PropertyChanged != null)
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("Image"));
+            }
+            get { return this._Image; }
+        }
     }
 
    

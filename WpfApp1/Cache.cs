@@ -12,9 +12,9 @@ namespace WpfApp1
     {
         public static List<string> ProductedFileList { get; private set; }
 
-        public static List<ModelClass> ModelPartList1 { get; private set; }
+        private static List<ModelClass> ModelPartList1 { get;  set; }
 
-        public static List<ModelClass> ModelPartList2 { get; private set; }
+        private static List<ModelClass> ModelPartList2 { get;  set; }
       
         public static List<string> GetProductedFileList()
         {
