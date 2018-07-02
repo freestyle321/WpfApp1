@@ -24,6 +24,12 @@ namespace WpfApp1.Control
         {
             InitializeComponent();
             scroll.ScrollChanged += Scroll_ScrollChanged;
+            ViewList.SelectionChanged += ViewList_SelectionChanged;
+        }
+
+        private void ViewList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedModel = ViewList.SelectedItem;
         }
 
         private void Scroll_ScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -70,5 +76,23 @@ namespace WpfApp1.Control
         {
 
         }
+
+
+
+        public object SelectedModel
+        {
+            get { return (object)GetValue(SelectedModelProperty); }
+            set { SetValue(SelectedModelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedModel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedModelProperty =
+            DependencyProperty.Register("SelectedModel", typeof(object), typeof(_3DViewList), new PropertyMetadata(0));
+
+
+    
+
+
+
     }
 }

@@ -36,7 +36,7 @@ namespace WpfApp1
             }
             get { return this._ModelPartList1; }
         }
-        public List<ModelClass> _ModelPartList2 { get; set; }
+        private List<ModelClass> _ModelPartList2 { get; set; }
 
         public List<ModelClass> ModelPartList2
         {
@@ -48,6 +48,32 @@ namespace WpfApp1
             }
             get { return this._ModelPartList2; }
         }
+
+        private ModelClass _LeftCurrentModel { get; set; }
+
+        public ModelClass LeftCurrentModel
+        {
+            set
+            {
+                _LeftCurrentModel = value;
+                if (this.PropertyChanged != null)
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("LeftCurrentModel"));
+            }
+            get { return this._LeftCurrentModel; }
+        }
+
+
+        private ModelClass _RightCurrentModel { get; set; }
+        public ModelClass RightCurrentModel
+        {
+            set
+            {
+                _RightCurrentModel = value;
+                if (this.PropertyChanged != null)
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("RightCurrentModel"));
+            }
+            get { return this._LeftCurrentModel; }
+        }
         #endregion
 
         public MainWindow()
@@ -55,7 +81,10 @@ namespace WpfApp1
             InitializeComponent();
             ModelPartList1 = CacheData.GetModelPartList1();
             ModelPartList2 = CacheData.GetModelPartList2();
+            left.DataContext = ModelPartList1;
+            left.DataContext = ModelPartList2;
             this.Closed += MainWindow_Closed;
+            this.DataContext = this;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)

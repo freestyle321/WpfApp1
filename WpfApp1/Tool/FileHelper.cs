@@ -63,7 +63,11 @@ namespace WpfApp1.Tool
         public static List<string> GetTxtFileContent(string fileName)
         {
             if (!File.Exists(fileName)) //文件不存在
-                return null;
+            {
+                File.Create(fileName);
+            }
+          
+
             FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(fs, Encoding.Default);
             List<string> result = new List<string>();

@@ -46,6 +46,7 @@ namespace WpfApp1
         {
             InitializeComponent();
             ImportModel1 = new ModelClass();
+         
         }
         public ImportModel(List<ModelClass> list) : base()
         {
