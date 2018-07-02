@@ -66,5 +66,9 @@ namespace WpfApp1.Control
 
         }
 
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

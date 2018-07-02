@@ -60,7 +60,7 @@ namespace WpfApp1
 
         private void MainWindow_Closed(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void MenuItem_ImportPart1(object sender, RoutedEventArgs e)
@@ -77,6 +77,15 @@ namespace WpfApp1
 
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var aa= Rhino.FileIO.File3dm.Read("");
+                
+        }
 
+        private void _3DViewList_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

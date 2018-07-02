@@ -78,7 +78,7 @@ namespace WpfApp1
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            ImportModel1.Name = Name.Text;
+            //ImportModel1.Name = Name.Text;
            
             if (!string.IsNullOrEmpty(ImportModel1.Name) && !string.IsNullOrEmpty(ImportModel1.File))
             {

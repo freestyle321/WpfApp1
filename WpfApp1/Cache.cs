@@ -12,10 +12,10 @@ namespace WpfApp1
     {
         public static List<string> ProductedFileList { get; private set; }
 
-        private static List<ModelClass> ModelPartList1 { get;  set; }
+        private static List<ModelClass> ModelPartList1 { get; set; }
 
-        private static List<ModelClass> ModelPartList2 { get;  set; }
-      
+        private static List<ModelClass> ModelPartList2 { get; set; }
+
         public static List<string> GetProductedFileList()
         {
             if (ProductedFileList == null) ProductedFileList = new List<string>();
@@ -31,10 +31,13 @@ namespace WpfApp1
 
             if (ModelPartList1 == null) ModelPartList1 = new List<ModelClass>();
             var result = FileHelper.GetTxtFileContent(FileHelper.Part1Directory + "\\part1.txt");
-            if (result != null)
+            string list = string.Empty;
+            result.ForEach(r =>
             {
-                ModelPartList1 = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelClass>>(result[0]);
-            }
+                var model = Newtonsoft.Json.JsonConvert.DeserializeObject<ModelClass>(r);
+                ModelPartList1.Add(model);
+            });
+    
             return ModelPartList1;
         }
 
@@ -42,16 +45,31 @@ namespace WpfApp1
         {
             if (ModelPartList2 == null) ModelPartList2 = new List<ModelClass>();
             var result = FileHelper.GetTxtFileContent(FileHelper.Part2Directory + "\\part2.txt");
-            if (result != null)
+            string list = string.Empty;
+            result.ForEach(r =>
             {
-                ModelPartList2 = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ModelClass>>(result[0]);
-            }
+               var model = Newtonsoft.Json.JsonConvert.DeserializeObject<ModelClass>(r);
+                ModelPartList2.Add(model);
+            });
+     
             return ModelPartList2;
         }
 
         public static void WriteModelPart()
         {
+            List<string> list1 = new List<string>();
+            List<string> list2 = new List<string>();
+            ModelPartList1.ForEach(r => {
+                var model =Newtonsoft.Json.JsonConvert.SerializeObject(r);
+                list1.Add(model);
+            });
+            ModelPartList2.ForEach(r => {
+                var model = Newtonsoft.Json.JsonConvert.SerializeObject(r);
+                list2.Add(model);
+            });
 
+            FileHelper.CreateFile(FileHelper.Part1Directory + "\\part1.txt", list1);
+            FileHelper.CreateFile(FileHelper.Part1Directory + "\\part1.txt", list2);
         }
          
     }

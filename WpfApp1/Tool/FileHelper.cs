@@ -69,13 +69,15 @@ namespace WpfApp1.Tool
             List<string> result = new List<string>();
             string line = "";
             while ((line = reader.ReadLine()) != null)
-            {
+            { 
                 result.Add(line);
             }
             reader.Close();
             fs.Close();
             return result;
         }
+
+ 
 
         /// <summary>
         /// 删除指定文件
@@ -95,6 +97,15 @@ namespace WpfApp1.Tool
         {
             if (!File.Exists(fileName))
             {
+                File.Create(fileName);
+            }
+            else
+            {
+                File.Delete(fileName);
+                File.Create(fileName);
+            }
+            if(content!=null)
+            {
                 FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
                 if (content != null && content.Count > 0)
                 {
@@ -107,6 +118,7 @@ namespace WpfApp1.Tool
                 }
                 fs.Close();
             }
+         
         }
 
         public static void CreateDictionarty(string filePath)

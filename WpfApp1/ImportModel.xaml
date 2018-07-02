@@ -14,17 +14,17 @@
         </Grid.RowDefinitions>
         <WrapPanel VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="0">
             <TextBlock   FontSize="35" >名称</TextBlock>
-            <TextBox Name="Name" Width="350" Height="50" Margin="10,0,0,0"></TextBox>
-            <Button  Content="确定" FontSize="20" Width="100" Margin="10,0,0,0" Click="Button_Click_2"></Button>
+            <TextBox  Text="{Binding ImportModel1.Name,Mode=TwoWay}" Name="Name" Width="350" Height="50" Margin="10,0,0,0"></TextBox>
+            <Button   Content="确定" FontSize="20" Width="100" Margin="10,0,0,0" Click="Button_Click_2"></Button>
         </WrapPanel>
         <WrapPanel VerticalAlignment="Center"  HorizontalAlignment="Center"  Grid.Row="1">
             <TextBlock   FontSize="35" >模型</TextBlock>
-            <TextBox  IsReadOnly="true" Width="350" Height="50" Margin="10,0,0,0"></TextBox>
+            <TextBox Text="{Binding ImportModel1.File}" IsReadOnly="true" Width="350" Height="50" Margin="10,0,0,0"></TextBox>
             <Button Content="导入" FontSize="20" Width="100" Margin="10,0,0,0" Click="Button_Click"></Button>
         </WrapPanel>
         <WrapPanel VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="2">
             <TextBlock   FontSize="35" >图片</TextBlock>
-            <TextBox  IsReadOnly="true" Width="350" Height="50" Margin="10,0,0,0"></TextBox>
+            <TextBox  Text="{Binding ImportModel1.Image}"  IsReadOnly="true" Width="350" Height="50" Margin="10,0,0,0"></TextBox>
             <Button Content="导入" FontSize="20"  Width="100" Margin="10,0,0,0" Click="Button_Click_1"></Button>
         </WrapPanel>
 

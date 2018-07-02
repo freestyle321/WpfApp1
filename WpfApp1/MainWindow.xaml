@@ -3,7 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:control="clr-namespace:WpfApp1.Control"
+        xmlns:b="clr-namespace:WpfApp1.ItemBehavior"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1000">
     <Grid >
@@ -16,7 +19,7 @@
                 <MenuItem  Margin="10,0,0,0" Header="菜单" Padding="5">
                     <MenuItem Header="导入戒指" Click="MenuItem_ImportPart1"  ></MenuItem>
                     <MenuItem Header="导入钻托" Click="MenuItem_ImportPart2"></MenuItem>
-                    <MenuItem Header="导入钻石" Click="MenuItem_ImportPart2"></MenuItem>
+                    <MenuItem Header="测试" Click="MenuItem_Click"></MenuItem>
 
                     <MenuItem Header="退出"></MenuItem>
                 </MenuItem>
@@ -40,9 +43,13 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
+            <control:_3DViewList Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="5" Loaded="_3DViewList_Loaded"></control:_3DViewList>
+            <control:_3DViewList Grid.Column="2" Grid.Row="0" Grid.RowSpan="5" Loaded="_3DViewList_Loaded"></control:_3DViewList>
             <Viewport3D x:Name="vp"           
-                    Margin="0,0,0,0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
+                    Margin="0,0,0,0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5">
+                <i:Interaction.Behaviors>
+                    <b:ViewPort3DBehavior/>
+                </i:Interaction.Behaviors>
                 <Viewport3D.Camera>
                     <!--FieldOfView="45" FarPlaneDistance="100" LookDirection="0,0,-3.4142135623731" NearPlaneDistance="0.1" Position="0,0,3.4142135623731"-->
                     <PerspectiveCamera    UpDirection="0,0,0"/>
