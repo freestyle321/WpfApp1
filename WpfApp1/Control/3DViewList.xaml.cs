@@ -20,11 +20,17 @@ namespace WpfApp1.Control
     /// </summary>
     public partial class _3DViewList : UserControl
     {
+        ScrollViewer scrollViewer;
         public _3DViewList()
         {
             InitializeComponent();
-            scroll.ScrollChanged += Scroll_ScrollChanged;
+            
             ViewList.SelectionChanged += ViewList_SelectionChanged;
+            Decorator decorator = (Decorator)VisualTreeHelper.GetChild(this, 0);
+
+            scrollViewer = (ScrollViewer)decorator.Child;
+            scrollViewer.ScrollChanged += Scroll_ScrollChanged;
+
         }
 
         private void ViewList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -40,11 +46,12 @@ namespace WpfApp1.Control
 
         private void Button_Up(object sender, RoutedEventArgs e)
         {
-            scroll.LineUp();
+              scrollViewer.LineUp();
+
         }
         private void Button_Down(object sender, RoutedEventArgs e)
         {
-            scroll.LineDown();
+              scrollViewer.LineDown();
         }
 
         private void FreshButtonStatus(ScrollViewer sc)
