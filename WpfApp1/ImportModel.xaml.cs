@@ -20,6 +20,7 @@ namespace WpfApp1
     /// </summary>
     public partial class ImportModel : Window
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         #region  Proprety
         private List<ModelClass> _DataBaseList { get; set; }
 
@@ -34,8 +35,17 @@ namespace WpfApp1
             get { return this._DataBaseList; }
         }
 
-
-        public ModelClass ImportModel1 { get; set; }
+        private ModelClass _ImportModel1 { get; set; }
+        public ModelClass ImportModel1
+        {
+            get { return this._ImportModel1; }
+            set
+            {
+                _ImportModel1 = value;
+                if (this.PropertyChanged != null)
+                    this.PropertyChanged(this, new PropertyChangedEventArgs("ImportModel1"));
+            }
+        }
 
 
 
@@ -46,9 +56,9 @@ namespace WpfApp1
         {
             InitializeComponent();
             ImportModel1 = new ModelClass();
-         
+            this.DataContext = ImportModel1;
         }
-        public ImportModel(List<ModelClass> list) : base()
+        public ImportModel(List<ModelClass> list) :this()
         {
             DataBaseList = list;
         }
@@ -62,8 +72,12 @@ namespace WpfApp1
             {
                 ImportModel1.File = filePath;
                 if(Name.Text==string.Empty)
+                {
                     ImportModel1.Name = fileName;
-                
+                   
+                }
+
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImportModel1"));
             }
         }
 
@@ -76,6 +90,7 @@ namespace WpfApp1
             {
                 ImportModel1.Image = filePath;
             }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImportModel1"));
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -85,6 +100,7 @@ namespace WpfApp1
             {
                 DataBaseList.Add(ImportModel1);
             }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DataBaseList"));
             this.Close();
         }
 

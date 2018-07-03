@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="ItemBehavior\ViewPort3DBehavior.cs" />
     <Compile Include="Tool\FileHelper.cs" />
+    <Compile Include="Tool\NotifyPropertyClass.cs" />
     <Compile Include="Tool\WavefrontObjLoader.cs" />
     <Page Include="Control\3DViewList.xaml">
       <SubType>Designer</SubType>

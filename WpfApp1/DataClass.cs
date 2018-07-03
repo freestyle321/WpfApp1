@@ -4,19 +4,20 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Tool;
 
 namespace WpfApp1
 {
-    public class ModelClass
+    public class ModelClass: NotifyObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+     
         private string _Name;
         public string  Name
         {
             set {
                 _Name = value;
-                if (this.PropertyChanged != null)
-                    this.PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+
+                NotifyPropertyChanged("Name");
             }
             get { return this._Name; }
         }
@@ -27,8 +28,7 @@ namespace WpfApp1
             set
             {
                 _File = value;
-                if (this.PropertyChanged != null)
-                    this.PropertyChanged(this, new PropertyChangedEventArgs("File"));
+                NotifyPropertyChanged("File");
             }
             get { return this._File; }
         }
@@ -39,8 +39,7 @@ namespace WpfApp1
             set
             {
                 _Image = value;
-                if (this.PropertyChanged != null)
-                    this.PropertyChanged(this, new PropertyChangedEventArgs("Image"));
+                NotifyPropertyChanged("Image");
             }
             get { return this._Image; }
         }

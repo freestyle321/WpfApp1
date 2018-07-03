@@ -82,9 +82,9 @@ namespace WpfApp1
             ModelPartList1 = CacheData.GetModelPartList1();
             ModelPartList2 = CacheData.GetModelPartList2();
             left.DataContext = ModelPartList1;
-            left.DataContext = ModelPartList2;
+            right.DataContext = ModelPartList2;
             this.Closed += MainWindow_Closed;
-            this.DataContext = this;
+          //  this.DataContext = this;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace WpfApp1
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var aa= Rhino.FileIO.File3dm.Read("");
+            //var aa= Rhino.FileIO.File3dm.Read("");
                 
         }
 
