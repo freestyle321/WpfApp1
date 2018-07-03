@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Tool;
 
 namespace WpfApp1
 {
@@ -24,7 +25,7 @@ namespace WpfApp1
         public event PropertyChangedEventHandler PropertyChanged;
         #region  Proprety
         private List<ModelClass> _ModelPartList1 { get; set; }
-
+        NotifyObject obj = new NotifyObject();
 
         public List<ModelClass> ModelPartList1
         {
@@ -43,8 +44,7 @@ namespace WpfApp1
             set
             {
                 _ModelPartList2 = value;
-                if (this.PropertyChanged != null)
-                    this.PropertyChanged(this, new PropertyChangedEventArgs("ModelPartList2"));
+                obj.NotifyPropertyChanged("ModelPartList2");
             }
             get { return this._ModelPartList2; }
         }
@@ -56,8 +56,7 @@ namespace WpfApp1
             set
             {
                 _LeftCurrentModel = value;
-                if (this.PropertyChanged != null)
-                    this.PropertyChanged(this, new PropertyChangedEventArgs("LeftCurrentModel"));
+                obj.NotifyPropertyChanged("LeftCurrentModel");
             }
             get { return this._LeftCurrentModel; }
         }
@@ -69,8 +68,7 @@ namespace WpfApp1
             set
             {
                 _RightCurrentModel = value;
-                if (this.PropertyChanged != null)
-                    this.PropertyChanged(this, new PropertyChangedEventArgs("RightCurrentModel"));
+                obj.NotifyPropertyChanged("RightCurrentModel");
             }
             get { return this._LeftCurrentModel; }
         }

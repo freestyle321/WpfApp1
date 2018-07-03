@@ -4,8 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.Control"
+             xmlns:models1="clr-namespace:WpfApp1"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+      
+        <ControlTemplate TargetType="{x:Type ListBox}" x:Key="ListboxTemplate">
+            <ScrollViewer  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+                <ItemsPresenter></ItemsPresenter>
+            </ScrollViewer>
+        </ControlTemplate>
+        <DataTemplate x:Key="ItemTemplate"   DataType="{x:Type models1:ModelClass}">
+            <Border Background="Transparent" Focusable="False" Width="auto" MinWidth="112">
+           
+                    <Grid Height="50"  Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="0.07*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Image   Source="{Binding Image}" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3,3,3,3"></Image>
+                        <TextBlock Text="{Binding Name}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+              
+        
+        </Border>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
@@ -15,35 +41,9 @@
         </Grid.RowDefinitions>
         <Button Name="btn_up" Content="UP" Grid.Row="0" Click="Button_Up"></Button>
         <Button Name="btn_down"  Content="Down"  Grid.Row="2" Click="Button_Down"></Button>
+
+        <ListBox  Template="{StaticResource ListboxTemplate}"   ItemTemplate="{StaticResource ItemTemplate}" Grid.Row="1" Name="ViewList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
    
-            <ListBox   Grid.Row="1" Name="ViewList">
-                <ListBox.Template>
-                    <ControlTemplate TargetType="{x:Type ListBox}">
-                        <ScrollViewer  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
-                            <ItemsPresenter></ItemsPresenter>
-                        </ScrollViewer>
-                    </ControlTemplate>
-
-                </ListBox.Template>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <Grid Height="50"  Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="0.07*"></RowDefinition>
-                            </Grid.RowDefinitions>
-
-                            <Image   Source="{Binding Image}" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3,3,3,3"></Image>
-                            <TextBlock Text="{Binding Name}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </Grid>
-                    </StackPanel>
-                       
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            <ScrollViewer Name="scroll" >
-            </ScrollViewer>
-
         </ListBox>
     
     

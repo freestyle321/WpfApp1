@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using Rhino;
-
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace WpfApp1.Tool
 {
-    public partial class NotifyObject : INotifyPropertyChanged
+    public class NotifyWindow:Window
     {
-
-
         #region INotifyPropertyChanged Members
 
 
@@ -19,7 +20,7 @@ namespace WpfApp1.Tool
 
         // 添加一个触发 PropertyChanged 事件的通用方法
 
-        public virtual void NotifyPropertyChanged(string propertyName)
+        protected virtual void NotifyPropertyChanged(string propertyName)
 
         {
             if (PropertyChanged != null)
@@ -33,5 +34,4 @@ namespace WpfApp1.Tool
 
         #endregion
     }
-
 }
