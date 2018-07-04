@@ -22,66 +22,17 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        #region  Proprety
-        private List<ModelClass> _ModelPartList1 { get; set; }
-        NotifyObject obj = new NotifyObject();
-
-        public List<ModelClass> ModelPartList1
-        {
-            set
-            {
-                _ModelPartList1 = value;
-                if (this.PropertyChanged != null)
-                    this.PropertyChanged(this, new PropertyChangedEventArgs("ModelPartList1"));
-            }
-            get { return this._ModelPartList1; }
-        }
-        private List<ModelClass> _ModelPartList2 { get; set; }
-
-        public List<ModelClass> ModelPartList2
-        {
-            set
-            {
-                _ModelPartList2 = value;
-                obj.NotifyPropertyChanged("ModelPartList2");
-            }
-            get { return this._ModelPartList2; }
-        }
-
-        private ModelClass _LeftCurrentModel { get; set; }
-
-        public ModelClass LeftCurrentModel
-        {
-            set
-            {
-                _LeftCurrentModel = value;
-                obj.NotifyPropertyChanged("LeftCurrentModel");
-            }
-            get { return this._LeftCurrentModel; }
-        }
 
 
-        private ModelClass _RightCurrentModel { get; set; }
-        public ModelClass RightCurrentModel
-        {
-            set
-            {
-                _RightCurrentModel = value;
-                obj.NotifyPropertyChanged("RightCurrentModel");
-            }
-            get { return this._LeftCurrentModel; }
-        }
-        #endregion
-
+        MainViewModel model = new MainViewModel();
         public MainWindow()
         {
             InitializeComponent();
-            ModelPartList1 = CacheData.GetModelPartList1();
-            ModelPartList2 = CacheData.GetModelPartList2();
-            left.DataContext = ModelPartList1;
-            right.DataContext = ModelPartList2;
+          
+          
+            //right.DataContext = ModelPartList2;
             this.Closed += MainWindow_Closed;
+            this.DataContext = model;
           //  this.DataContext = this;
         }
 
@@ -92,16 +43,13 @@ namespace WpfApp1
 
         private void MenuItem_ImportPart1(object sender, RoutedEventArgs e)
         {
-            ImportModel imp = new ImportModel(ModelPartList1);
-            imp.ShowDialog();
-       
-                
+         
         }
         private void MenuItem_ImportPart2(object sender, RoutedEventArgs e)
         {
-            ImportModel imp = new ImportModel(ModelPartList2);
+            ImportModel imp = new ImportModel(model.ModelPartList2);
             imp.ShowDialog();
-
+            model.ModelPartList2 = imp.DataBaseList;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

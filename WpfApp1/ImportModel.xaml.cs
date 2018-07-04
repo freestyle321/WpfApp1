@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.Tool;
 
 namespace WpfApp1
 {
@@ -20,12 +22,12 @@ namespace WpfApp1
     /// </summary>
     public partial class ImportModel : Window
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+      
         #region  Proprety
-        private List<ModelClass> _DataBaseList { get; set; }
+        private ObservableCollection<ModelClass> _DataBaseList { get; set; }
 
 
-        public List<ModelClass> DataBaseList
+        public ObservableCollection<ModelClass> DataBaseList
         {
             set
             {
@@ -42,8 +44,7 @@ namespace WpfApp1
             set
             {
                 _ImportModel1 = value;
-                if (this.PropertyChanged != null)
-                    this.PropertyChanged(this, new PropertyChangedEventArgs("ImportModel1"));
+             
             }
         }
 
@@ -58,7 +59,7 @@ namespace WpfApp1
             ImportModel1 = new ModelClass();
             this.DataContext = ImportModel1;
         }
-        public ImportModel(List<ModelClass> list) :this()
+        public ImportModel(ObservableCollection<ModelClass> list) :this()
         {
             DataBaseList = list;
         }
@@ -77,7 +78,7 @@ namespace WpfApp1
                    
                 }
 
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImportModel1"));
+               // this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImportModel1"));
             }
         }
 
@@ -90,7 +91,7 @@ namespace WpfApp1
             {
                 ImportModel1.Image = filePath;
             }
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImportModel1"));
+            //this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImportModel1"));
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -100,7 +101,7 @@ namespace WpfApp1
             {
                 DataBaseList.Add(ImportModel1);
             }
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DataBaseList"));
+           // this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DataBaseList"));
             this.Close();
         }
 

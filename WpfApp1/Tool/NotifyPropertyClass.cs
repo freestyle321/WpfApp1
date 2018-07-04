@@ -15,8 +15,7 @@ namespace WpfApp1.Tool
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
-
+      
         // 添加一个触发 PropertyChanged 事件的通用方法
 
         public virtual void NotifyPropertyChanged(string propertyName)
@@ -26,7 +25,7 @@ namespace WpfApp1.Tool
 
             {
 
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
             }
         }

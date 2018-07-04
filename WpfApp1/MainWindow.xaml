@@ -7,8 +7,31 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:control="clr-namespace:WpfApp1.Control"
         xmlns:b="clr-namespace:WpfApp1.ItemBehavior"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1000">
+        mc:Ignorable="d" x:Name="root"
+        Title="MainWindow" Height="450" Width="1000" >
+    <Window.Resources>
+        <ControlTemplate TargetType="{x:Type ListBox}" x:Key="ListboxTemplate">
+            <ScrollViewer  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+                <ItemsPresenter></ItemsPresenter>
+            </ScrollViewer>
+        </ControlTemplate>
+        <DataTemplate x:Key="ItemTemplate"   DataType="{x:Type local:ModelClass}">
+            <Border Background="Transparent" Focusable="False" Width="auto">
+
+                <Grid   Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.07*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Image   Source="{Binding Image}" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3,3,3,3"></Image>
+                    <TextBlock Text="{Binding Name}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+
+
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -17,7 +40,7 @@
         <DockPanel Height="30" VerticalAlignment="Top" Grid.Row="0">
             <Menu   >
                 <MenuItem  Margin="10,0,0,0" Header="菜单" Padding="5">
-                    <MenuItem Header="导入戒指" Click="MenuItem_ImportPart1"  ></MenuItem>
+                    <MenuItem Header="导入戒指"  Command="{Binding ImportPart1Comand}" ></MenuItem>
                     <MenuItem Header="导入钻托" Click="MenuItem_ImportPart2"></MenuItem>
                     <MenuItem Header="测试" Click="MenuItem_Click"></MenuItem>
 
@@ -43,18 +66,66 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <control:_3DViewList x:Name="left" SelectedModel="{Binding LeftCurrentModel}"  Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="5" Loaded="_3DViewList_Loaded"></control:_3DViewList>
-            <control:_3DViewList  x:Name="right"  SelectedModel="{Binding RightCurrentModel}"  Grid.Column="2" Grid.Row="0" Grid.RowSpan="5" Loaded="_3DViewList_Loaded"></control:_3DViewList>
-            <Viewport3D x:Name="vp"           
-                    Margin="0,0,0,0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5">
-                <!--<i:Interaction.Behaviors>
+            <Border  Grid.Column="0" Grid.Row="0"  Grid.RowSpan="5"   BorderThickness="1" BorderBrush="Gray">
+                <ListBox   x:Name="left" ItemsSource="{Binding ModelPartList1,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  Template="{StaticResource ListboxTemplate}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Transparent" Focusable="False" Width="{Binding ActualWidth-30,ElementName=left}"  >
+
+                                <Grid Height="100" HorizontalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="80*"></RowDefinition>
+                                        <RowDefinition Height="20*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Image   Source="{Binding Image}" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3,3,3,3"></Image>
+                                    <TextBlock Text="{Binding Name}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+
+            <Border  Grid.Column="2" Grid.Row="0"  Grid.RowSpan="5"  BorderThickness="1" BorderBrush="Gray">
+                <ListBox  x:Name="right" ItemsSource="{Binding ModelPartList2,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  Template="{StaticResource ListboxTemplate}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Transparent" Focusable="False" Width="{Binding ActualWidth-30,ElementName=left}"  >
+
+                                <Grid Height="100" HorizontalAlignment="Stretch">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="80*"></RowDefinition>
+                                        <RowDefinition Height="20*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Image   Source="{Binding Image}" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3,3,3,3"></Image>
+                                    <TextBlock Text="{Binding Name}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            
+            <!--<control:_3DViewList x:Name="left" Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="5" Loaded="_3DViewList_Loaded"></control:_3DViewList>-->
+            <!--<control:_3DViewList  x:Name="right"  Grid.Column="2" Grid.Row="0" Grid.RowSpan="5" Loaded="_3DViewList_Loaded"></control:_3DViewList>-->
+
+            <Border  Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" BorderThickness="1" BorderBrush="Gray">
+                <Viewport3D x:Name="vp"           
+                    Margin="0,0,0,0" >
+                    <!--<i:Interaction.Behaviors>
                     <b:ViewPort3DBehavior/>
                 </i:Interaction.Behaviors>-->
-                <Viewport3D.Camera>
-                    <!--FieldOfView="45" FarPlaneDistance="100" LookDirection="0,0,-3.4142135623731" NearPlaneDistance="0.1" Position="0,0,3.4142135623731"-->
-                    <PerspectiveCamera    UpDirection="0,0,0"/>
-                </Viewport3D.Camera>
-            </Viewport3D>
+                    <Viewport3D.Camera>
+                        <!--FieldOfView="45" FarPlaneDistance="100" LookDirection="0,0,-3.4142135623731" NearPlaneDistance="0.1" Position="0,0,3.4142135623731"-->
+                        <PerspectiveCamera    UpDirection="0,0,0"/>
+                    </Viewport3D.Camera>
+                </Viewport3D>
+            </Border>
+           
         </Grid>
     </Grid>
 </Window>

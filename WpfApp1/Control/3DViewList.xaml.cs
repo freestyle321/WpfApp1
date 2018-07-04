@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Tool;
 
 namespace WpfApp1.Control
 {
@@ -21,16 +22,25 @@ namespace WpfApp1.Control
     public partial class _3DViewList : UserControl
     {
         ScrollViewer scrollViewer;
+        NotifyObject obj = new NotifyObject();
         public _3DViewList()
         {
             InitializeComponent();
-            
+            ViewList.SourceUpdated += ViewList_SourceUpdated;
             ViewList.SelectionChanged += ViewList_SelectionChanged;
-            Decorator decorator = (Decorator)VisualTreeHelper.GetChild(this, 0);
+            //   ViewList.ItemsSource = ModelList;
 
-            scrollViewer = (ScrollViewer)decorator.Child;
-            scrollViewer.ScrollChanged += Scroll_ScrollChanged;
+            ViewList.ItemsSource = ModelList;
+        }
 
+        private void ViewList_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            scrollViewer = GetDescendantByType(ViewList, typeof(ScrollViewer)) as ScrollViewer;
+            if(scrollViewer!=null)
+            {
+                scrollViewer.ScrollChanged += Scroll_ScrollChanged;
+            }
+           
         }
 
         private void ViewList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -46,12 +56,14 @@ namespace WpfApp1.Control
 
         private void Button_Up(object sender, RoutedEventArgs e)
         {
+            if(scrollViewer!=null)
               scrollViewer.LineUp();
 
         }
         private void Button_Down(object sender, RoutedEventArgs e)
         {
-              scrollViewer.LineDown();
+            if (scrollViewer != null)
+                scrollViewer.LineDown();
         }
 
         private void FreshButtonStatus(ScrollViewer sc)
@@ -97,8 +109,47 @@ namespace WpfApp1.Control
             DependencyProperty.Register("SelectedModel", typeof(object), typeof(_3DViewList), new PropertyMetadata(0));
 
 
-    
+        private List<ModelClass> _ModelList { get; set; }
+        public List<ModelClass> ModelList
+        {
+            set
+            {
+                _ModelList = value;
 
+                obj.NotifyPropertyChanged("ModelList");
+
+            }
+            get { return this._ModelList; }
+        }
+
+
+   
+        public  Visual GetDescendantByType(Visual element, Type type)
+        {
+            if (element == null)
+            {
+                return null;
+            }
+            if (element.GetType() == type)
+            {
+                return element;
+            }
+            Visual foundElement = null;
+            if (element is FrameworkElement)
+            {
+                (element as FrameworkElement).ApplyTemplate();
+            }
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            {
+                Visual visual = VisualTreeHelper.GetChild(element, i) as Visual;
+                foundElement = GetDescendantByType(visual, type);
+                if (foundElement != null)
+                {
+                    break;
+                }
+            }
+            return foundElement;
+        }
 
 
     }
