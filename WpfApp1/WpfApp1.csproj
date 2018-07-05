@@ -75,6 +75,7 @@
     <Compile Include="MainViewModel.cs" />
     <Compile Include="NotifyPropertyClass.cs" />
     <Compile Include="Tool\FileHelper.cs" />
+    <Compile Include="Tool\Model3DClass.cs" />
     <Compile Include="Tool\NotifyPropertyClass.cs" />
     <Compile Include="Tool\NotifyWindow.cs" />
     <Compile Include="Tool\WavefrontObjLoader.cs" />

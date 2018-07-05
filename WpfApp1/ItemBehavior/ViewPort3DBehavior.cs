@@ -22,6 +22,7 @@ namespace WpfApp1.ItemBehavior
         double mouseDeltaFactor = 0.4;
         public ViewPort3DBehavior()
         {
+            
             myPCamera = new PerspectiveCamera();
             myPCamera.Position = new Point3D(0, 0, 200);
             myPCamera.LookDirection = new Vector3D(0, 0, -1);
@@ -31,7 +32,7 @@ namespace WpfApp1.ItemBehavior
         }
         protected override void OnAttached()
         {
-
+        
             Viewport3D.MouseEnter += Vp_MouseEnter;
             Viewport3D.MouseLeave += Vp_MouseLeave;
             Viewport3D.MouseWheel += Viewport3D_MouseWheel;

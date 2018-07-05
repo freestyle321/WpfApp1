@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WpfApp1.Tool
 {
-    public class FileHelper
+    public  class FileHelper
     {
         private static string fileDirectory = System.IO.Directory.GetCurrentDirectory();
 
-        public static string Part1Directory;
-        public static string Part2Directory;
-        public static string ProductedDirectory;
-        public FileHelper()
+        public static string Part1Directory= System.IO.Directory.GetCurrentDirectory() + "\\Data\\Part1";
+        public static string Part2Directory= System.IO.Directory.GetCurrentDirectory() + "\\Data\\Part2";
+        public static string ProductedDirectory=System.IO.Directory.GetCurrentDirectory() + "\\Data\\Producted";
+       
+
+        public  void CreateDictionarty()
         {
-            Part1Directory = fileDirectory + "\\Data\\Part1";
-            Part2Directory = fileDirectory + "\\Data\\Part2";
-            ProductedDirectory = fileDirectory + "\\Data\\Producted";
             CreateDictionarty(Part1Directory);
             CreateDictionarty(Part2Directory);
             CreateDictionarty(ProductedDirectory);
@@ -28,7 +28,7 @@ namespace WpfApp1.Tool
         /// 获取指定路径下所有文件
         /// </summary>        
         /// 
-        public static List<string> GetFiles(string path)
+        public  List<string> GetFiles(string path)
         {
             //using System.IO;
             if (!Directory.Exists(path))  //路径不存在
@@ -60,14 +60,15 @@ namespace WpfApp1.Tool
         /// 获取指定文件内容
         /// 注：这里适用于读取文本类型文件
         /// </summary>
-        public static List<string> GetTxtFileContent(string fileName)
+        public  List<string> GetTxtFileContent(string fileName)
         {
             if (!File.Exists(fileName)) //文件不存在
             {
-                File.Create(fileName);
+                var sf= File.Create(fileName);
+                sf.Close();
             }
-          
 
+            Thread.Sleep(100);
             FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(fs, Encoding.Default);
             List<string> result = new List<string>();
@@ -86,7 +87,7 @@ namespace WpfApp1.Tool
         /// <summary>
         /// 删除指定文件
         /// </summary>        
-        public static void DeleteFile(string fileName)
+        public  void DeleteFile(string fileName)
         {
             if (File.Exists(fileName))
                 File.Delete(fileName);
@@ -97,20 +98,25 @@ namespace WpfApp1.Tool
         /// </summary>
         /// <param name="path">文件全路径</param>
         /// <param name="content">写入内容</param>
-        public static void CreateFile(string fileName, List<string> content = null)
+        public  void CreateFile(string fileName, List<string> content = null)
         {
             if (!File.Exists(fileName))
             {
-                File.Create(fileName);
+                var sf = File.Create(fileName);
+                sf.Close();
+              //  File.Create(fileName);
             }
             else
             {
                 File.Delete(fileName);
-                File.Create(fileName);
+                var sf = File.Create(fileName);
+                sf.Close();
+             
             }
-            if(content!=null)
+            Thread.Sleep(200);
+            if (content!=null)
             {
-                FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite);
                 if (content != null && content.Count > 0)
                 {
                     StreamWriter sw = new StreamWriter(fs);
@@ -125,7 +131,7 @@ namespace WpfApp1.Tool
          
         }
 
-        public static void CreateDictionarty(string filePath)
+        public  void CreateDictionarty(string filePath)
         {
             if (!Directory.Exists(filePath))
             {

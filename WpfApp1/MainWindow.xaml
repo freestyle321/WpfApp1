@@ -114,15 +114,24 @@
             <!--<control:_3DViewList  x:Name="right"  Grid.Column="2" Grid.Row="0" Grid.RowSpan="5" Loaded="_3DViewList_Loaded"></control:_3DViewList>-->
 
             <Border  Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" BorderThickness="1" BorderBrush="Gray">
-                <Viewport3D x:Name="vp"           
-                    Margin="0,0,0,0" >
+                <Viewport3D   x:Name="vp"           
+                    Margin="0,0,0,0"  >
                     <!--<i:Interaction.Behaviors>
                     <b:ViewPort3DBehavior/>
                 </i:Interaction.Behaviors>-->
-                    <Viewport3D.Camera>
+                    <Viewport3D.Camera >
+                        
                         <!--FieldOfView="45" FarPlaneDistance="100" LookDirection="0,0,-3.4142135623731" NearPlaneDistance="0.1" Position="0,0,3.4142135623731"-->
                         <PerspectiveCamera    UpDirection="0,0,0"/>
+                        
                     </Viewport3D.Camera>
+                    <Viewport3D.Children>
+
+                        <ModelVisual3D Content="{Binding PartModel3DOne}"/>
+
+                        <ModelVisual3D Content="{Binding PartModel3DTwo}"/>
+
+                    </Viewport3D.Children>
                 </Viewport3D>
             </Border>
            

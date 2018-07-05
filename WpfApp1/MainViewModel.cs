@@ -14,7 +14,8 @@ namespace WpfApp1
     {
         #region  Proprety
         private ObservableCollection<ModelClass> _ModelPartList1 { get; set; }
-      
+        FileHelper FileHelper = new FileHelper();
+        CacheData CacheData = new CacheData();
         public ObservableCollection<ModelClass> ModelPartList1
         {
             set
@@ -61,9 +62,33 @@ namespace WpfApp1
             }
             get { return this._LeftCurrentModel; }
         }
+
+        private ModelVisual3DWithName _PartModel3DOne { get; set; }
+        public ModelVisual3DWithName PartModel3DOne
+        {
+            set
+            {
+                _PartModel3DOne = value;
+                NotifyPropertyChanged("PartModel3DOne");
+            }
+            get { return this._PartModel3DOne; }
+        }
+
+        private ModelVisual3DWithName _PartModel3DTwo { get; set; }
+        public ModelVisual3DWithName PartModel3DTwo
+        {
+            set
+            {
+                _PartModel3DTwo = value;
+                NotifyPropertyChanged("PartModel3DTwo");
+            }
+            get { return this._PartModel3DTwo; }
+        }
+
         #endregion
         public MainViewModel()
         {
+            FileHelper.CreateDictionarty(); 
             ModelPartList1 = CacheData.GetModelPartList1();
             ModelPartList2 = CacheData.GetModelPartList2();
         }
