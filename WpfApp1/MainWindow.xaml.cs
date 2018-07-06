@@ -35,16 +35,19 @@ namespace WpfApp1
         MainViewModel model = new MainViewModel();
         public MainWindow()
         {
+       
             InitializeComponent();
-        
 
+            model.change += new MainViewModel.OnSelectChange(Model_change);
+            model.change1 += new MainViewModel.OnSelectChange(Model_change1); ;
             //right.DataContext = ModelPartList2;
             this.Closed += MainWindow_Closed;
             this.DataContext = model;
+         
             //摄像头
             myPCamera = new PerspectiveCamera();
             myPCamera.Position = new Point3D(0, 0, 200);
-            myPCamera.LookDirection = new Vector3D(0, 0, -1);
+            myPCamera.LookDirection = new Vector3D(0, 0,-1);
             myPCamera.FieldOfView = 1000;
             vp.Camera = myPCamera;
 
@@ -70,8 +73,8 @@ namespace WpfApp1
             WavefrontObjLoader wfl = new WavefrontObjLoader();
             //ModelVisual3DWithName是WavefrontObjLoader定义的继承ModelVisual3D的对象，直接使用ModelVisual3D也是可以的
             //导入obj，第一个模型命名为m
-            ModelVisual3DWithName m = wfl.LoadObjFile(@"C:\Users\36102\Desktop\rdk_material_scene.obj");
-            m.Content = myModel3DGroup;
+            //ModelVisual3DWithName m = wfl.LoadObjFile(@"C:\Users\36102\Desktop\rdk_material_scene.obj");
+           //m.Content = myModel3DGroup;
             ////导入obj，第二个模型命名为n
             //var n = wfl.LoadObjFile(@"C:\Users\hasee\Desktop\WpfApplication2\WpfApplication2\精细人体.obj");
             //n.Content = myModel3DGroup;
@@ -92,10 +95,10 @@ namespace WpfApp1
             ts.ScaleY = 1.5;
             ts.ScaleZ = 1.6;
             var tg = new Transform3DGroup();
-            tg.Children.Add(tr);// tg.Children.Add(tr2); tg.Children.Add(tt); tg.Children.Add(ts);
+           // tg.Children.Add(tr);// tg.Children.Add(tr2); tg.Children.Add(tt); tg.Children.Add(ts);
             //n.Transform = tg;
             //将两个模型添加到场景中
-            vp.Children.Add(m);
+            //vp.Children.Add(m);
             //   vp.Children.Add(n);
             //添加鼠标事件，用于显示隐藏光晕特效
             vp.MouseEnter += Vp_MouseEnter;
@@ -103,7 +106,70 @@ namespace WpfApp1
             vp.MouseWheel += VP_MouseWheel;
             vp.MouseMove += Window_MouseMove;
             vp.MouseLeftButtonDown += vp_MouseLeftButtonDown;
+         
         }
+
+        private void Model_change1()
+        {
+            foreach (var item in vp.Children)
+            {
+                if (((ModelVisual3DWithName)item).Name == model.PartModel3DTwo.Name)
+                { return; }
+                if (((ModelVisual3DWithName)item).Name == model.LastSelectRightModelName)
+                {
+                    vp.Children.Remove(item);
+                    break;
+                }
+            }
+
+            vp.Children.Add(model.PartModel3DTwo);
+         
+        }
+
+        private void Model_change()
+        {
+            foreach (var item in vp.Children)
+            {
+                if (((ModelVisual3DWithName)item).Name == model.PartModel3DOne.Name)
+                { return; }
+                if (((ModelVisual3DWithName)item).Name == model.LastSelectLeftModelName)
+                {
+                    vp.Children.Remove(item);
+                    break;
+                }
+                    
+            }
+
+            vp.Children.Add(model.PartModel3DOne);
+           
+        }
+    
+
+        //private void Model_OnSelectChange1(object sender, EventArgs e)
+        //{
+        //    foreach (var item in vp.Children)
+        //    {
+        //        if (((ModelVisual3DWithName)item).Name == model.PartModel3DTwo.Name)
+        //        { return; }
+        //        if (((ModelVisual3DWithName)item).Name == model.LastSelectRightModelName)
+        //            vp.Children.Remove(item);
+        //    }
+
+        //    vp.Children.Add(model.PartModel3DOne);
+        //}
+
+        //private void Model_OnSelectChange(object sender, EventArgs e)
+        //{
+        //    foreach (var item in vp.Children)
+        //    {
+        //        if(((ModelVisual3DWithName)item).Name== model.PartModel3DOne.Name)
+        //        { return; }
+        //        if (((ModelVisual3DWithName)item).Name == model.LastSelectLeftModelName)
+        //            vp.Children.Remove(item);
+        //    }
+           
+        //    vp.Children.Add(model.PartModel3DOne);
+        //}
 
         private void MainWindow_Closed(object sender, EventArgs e)
         {

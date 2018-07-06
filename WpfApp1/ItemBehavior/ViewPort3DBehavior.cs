@@ -29,7 +29,11 @@ namespace WpfApp1.ItemBehavior
             myPCamera.FieldOfView = 1000;
             Viewport3D=(Viewport3D)this.AssociatedObject;
             Viewport3D.Camera = myPCamera;
+         
         }
+
+  
+
         protected override void OnAttached()
         {
         

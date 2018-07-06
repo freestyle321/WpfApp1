@@ -76,7 +76,7 @@ namespace WpfApp1
           
 
             FileHelper.CreateFile(FileHelper.Part1Directory + "\\part1.txt", list1);
-            FileHelper.CreateFile(FileHelper.Part1Directory + "\\part2.txt", list2);
+            FileHelper.CreateFile(FileHelper.Part2Directory + "\\part2.txt", list2);
         }
          
     }

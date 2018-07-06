@@ -67,7 +67,7 @@
                 <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Border  Grid.Column="0" Grid.Row="0"  Grid.RowSpan="5"   BorderThickness="1" BorderBrush="Gray">
-                <ListBox   x:Name="left" ItemsSource="{Binding ModelPartList1,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  Template="{StaticResource ListboxTemplate}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <ListBox   x:Name="left" SelectedItem="{Binding  LeftCurrentModel,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ModelPartList1,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  Template="{StaticResource ListboxTemplate}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border Background="Transparent" Focusable="False" Width="{Binding ActualWidth-30,ElementName=left}"  >
@@ -89,7 +89,7 @@
             </Border>
 
             <Border  Grid.Column="2" Grid.Row="0"  Grid.RowSpan="5"  BorderThickness="1" BorderBrush="Gray">
-                <ListBox  x:Name="right" ItemsSource="{Binding ModelPartList2,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  Template="{StaticResource ListboxTemplate}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <ListBox  x:Name="right" SelectedItem="{Binding  RightCurrentModel,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ModelPartList2,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  Template="{StaticResource ListboxTemplate}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border Background="Transparent" Focusable="False" Width="{Binding ActualWidth-30,ElementName=left}"  >
@@ -114,24 +114,22 @@
             <!--<control:_3DViewList  x:Name="right"  Grid.Column="2" Grid.Row="0" Grid.RowSpan="5" Loaded="_3DViewList_Loaded"></control:_3DViewList>-->
 
             <Border  Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" BorderThickness="1" BorderBrush="Gray">
-                <Viewport3D   x:Name="vp"           
+                <Viewport3D   x:Name="vp" 
                     Margin="0,0,0,0"  >
                     <!--<i:Interaction.Behaviors>
                     <b:ViewPort3DBehavior/>
                 </i:Interaction.Behaviors>-->
-                    <Viewport3D.Camera >
-                        
-                        <!--FieldOfView="45" FarPlaneDistance="100" LookDirection="0,0,-3.4142135623731" NearPlaneDistance="0.1" Position="0,0,3.4142135623731"-->
-                        <PerspectiveCamera    UpDirection="0,0,0"/>
-                        
+                    <Viewport3D.Camera>
+                        <PerspectiveCamera   FieldOfView="45" FarPlaneDistance="100" LookDirection="0,0,-3.4142135623731" NearPlaneDistance="0.1" Position="0,0,3.4142135623731" UpDirection="0,1,0"/>
                     </Viewport3D.Camera>
-                    <Viewport3D.Children>
+                    <!--<Viewport3D.Children  >
+                        
+                        <local:ModelVisual3DWithName   Content="{Binding PartModel3DOne,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></local:ModelVisual3DWithName>
+                        <local:ModelVisual3DWithName Content="{Binding PartModel3DTwo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></local:ModelVisual3DWithName>
 
-                        <ModelVisual3D Content="{Binding PartModel3DOne}"/>
+                        --><!--<ModelVisual3D Content="{Binding PartModel3DTwo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>--><!--
 
-                        <ModelVisual3D Content="{Binding PartModel3DTwo}"/>
-
-                    </Viewport3D.Children>
+                    </Viewport3D.Children>-->
                 </Viewport3D>
             </Border>
            
