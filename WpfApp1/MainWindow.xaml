@@ -44,10 +44,10 @@
                     <MenuItem Header="导入钻托" Click="MenuItem_ImportPart2"></MenuItem>
                     <MenuItem Header="测试" Click="MenuItem_Click"></MenuItem>
 
-                    <MenuItem Header="退出"></MenuItem>
+                    <MenuItem Header="退出" ></MenuItem>
                 </MenuItem>
 
-                <MenuItem Header="合并" Padding="5">
+                <MenuItem Header="合并"  Command="{Binding ExportComand}"  Padding="5">
                    
                 </MenuItem>
             </Menu>

@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.3D, Version=18.7.0.0, Culture=neutral, PublicKeyToken=f071c641d0b4582b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.3D.18.7.0\lib\net40\Aspose.3D.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Data.Tools.Components, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -68,6 +71,10 @@
     <Compile Include="Cache.cs" />
     <Compile Include="Command\Command.cs" />
     <Compile Include="DataClass.cs" />
+    <Compile Include="ExportModel.xaml.cs">
+      <DependentUpon>ExportModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExportViewModel.cs" />
     <Compile Include="ImportModel.xaml.cs">
       <DependentUpon>ImportModel.xaml</DependentUpon>
     </Compile>
@@ -80,6 +87,10 @@
     <Compile Include="Tool\NotifyWindow.cs" />
     <Compile Include="Tool\WavefrontObjLoader.cs" />
     <Page Include="Control\3DViewList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExportModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

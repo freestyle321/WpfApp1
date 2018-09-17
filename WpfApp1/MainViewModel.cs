@@ -166,5 +166,41 @@ namespace WpfApp1
 
 
         }
+
+
+        private RelayCommand _ExportComand;
+
+        public ICommand ExportComand
+        {
+            get
+            {
+                if (_ExportComand == null)
+                {
+                    _ExportComand = new RelayCommand(
+                        p => ExportComandExec(p),
+                        p => CanExportComandExec(p));
+                }
+
+                return _ExportComand;
+            }
+        }
+
+        private bool CanExportComandExec(object o)
+        {
+
+            return true;
+        }
+
+        private void ExportComandExec(object o)
+        {
+
+            ExportModel export = new ExportModel();
+            export.aa.PartOneName = LeftCurrentModel.Name;
+            export.aa.PartOneALLName = LeftCurrentModel.File;
+            export.aa.PartTwoName = RightCurrentModel.Name;
+            export.aa.PartTwoALLName = RightCurrentModel.Name;
+           export.ShowDialog();
+
+        }
     }
 }
