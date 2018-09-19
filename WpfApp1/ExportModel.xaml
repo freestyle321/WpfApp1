@@ -56,13 +56,13 @@
                 <MenuItem Header="合并" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding ExportComand}"></MenuItem>
             </Menu>
         </DockPanel>
-        <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-200,0,0,0"  >
-        <TextBlock  Margin="0,0,300,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <WrapPanel  Grid.Row="1"   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"  >
+            <TextBlock Grid.Row="1" Margin="0,0,0,0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center">
               <Run Text="模型1:"> 
               </Run>
                <Run Text="{Binding PartOneName}"></Run>
         </TextBlock>
-            <TextBlock  FontSize="20">
+            <TextBlock Margin="100,0,0,0"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  FontSize="20">
               <Run Text="模型2:"> 
               </Run>
                <Run Text="{Binding PartTwoName}"></Run>

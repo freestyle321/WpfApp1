@@ -193,12 +193,13 @@ namespace WpfApp1
 
         private void ExportComandExec(object o)
         {
+            if (LeftCurrentModel == null || RightCurrentModel == null) return;
 
             ExportModel export = new ExportModel();
             export.aa.PartOneName = LeftCurrentModel.Name;
             export.aa.PartOneALLName = LeftCurrentModel.File;
             export.aa.PartTwoName = RightCurrentModel.Name;
-            export.aa.PartTwoALLName = RightCurrentModel.Name;
+            export.aa.PartTwoALLName = RightCurrentModel.File;
            export.ShowDialog();
 
         }
